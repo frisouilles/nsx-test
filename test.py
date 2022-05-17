@@ -3,7 +3,7 @@ from lib import auth
 from lib import getargs
 from vmware.vapi.bindings.struct import PrettyPrinter
 from vmware.vapi.bindings.converter import TypeConverter
-from com.vmware.nsx.model_client import VirtualNetworkInterface
+from com.vmware.nsx.model_client import VirtualNetworkInterface, IPSet
 from com.vmware.nsx_policy.model_client import (Expression,
                                                 Group,
                                                 ExternalIDExpression,
@@ -17,20 +17,9 @@ def find_virtual_network_interface_by_ip(api_client, ip):
     return [vni.convert_to(VirtualNetworkInterface) for vni in search.results]
 
 def get_sg(api_client, sg_name):
+    # Get group
     group = api_client.infra.domains.Groups.get("default", sg_name)
-    for expression in group.get_field("expression"):
-        expr_typ = expression.to_dict()["resource_type"]
-        expr_obj = ""
-        if expr_typ == "ExternalIDExpression":
-            expr_obj = expression.convert_to(ExternalIDExpression)
-        elif expr_typ == "IPAddressExpression":
-            expr_obj = expression.convert_to(IPAddressExpression)
-        pp.pprint(expr_obj)
 
-    members_types = api_client.infra.domains.groups.MemberTypes.get("default", sg_name)
-    for mbr_type in members_types.results:
-        if mbr_type == "IPAddress":
-            ip_addresses = api_client.infra.domains.groups.members.IpAddresses.list("default", sg_name)
     return group
 
 def create_sg(api_client, sg_name, addresses=[]):
@@ -72,10 +61,22 @@ def main():
     )
         
     #pp.pprint(find_virtual_network_interface_by_ip(api_client, '10.200.161.8'))
-    group = get_sg(policy_api_client, "test-sg-mndb")
+    #group = get_sg(policy_api_client, "AFRLMKSDMTA.INT.ADEO.COM")
+    #print("group")
+    #pp.pprint(group)
+    #search = policy_api_client.search.Query.list(
+    #    query='resource_type:Segment AND subnets.network:"10.205.156.254/26"'
+    #)
+    #print("result")
+    #pp.pprint(search.results)
+    #print("Expression")
+    #for expr in group.expression:
+    #    pp.pprint(expr.to_dict())
     #pp.pprint(update_sg(policy_api_client, "test-sg-mndb", "test-sg-mndb-2"))
     #pp.pprint(create_sg(policy_api_client, "test-sg-mndb"))
 
+    
+    api_client.IpSets.create(IPSet(ip_addresses=["10.200.191.129-10.200.191.132"]))
 if __name__ == "__main__":
     main()
 
