@@ -1,5 +1,0 @@
-nsx-policy-python-sdk@ file://localhost//home/frisouilles/projects/nsx-t/install/lib/nsx_policy_python_sdk-3.1.2.0.0-py2.py3-none-any.whl
-nsx-python-sdk@ file://localhost//home/frisouilles/projects/nsx-t/install/lib/nsx_python_sdk-3.1.2.0.0-py2.py3-none-any.whl
-vapi-client-bindings@ file://localhost//home/frisouilles/projects/nsx-t/install/lib/vapi_common_client-2.19.0-py2.py3-none-any.whl
-vapi-common-client@ file://localhost//home/frisouilles/projects/nsx-t/install/lib/vapi_common-2.19.0-py2.py3-none-any.whl
-vapi-runtime@ file://localhost//home/frisouilles/projects/nsx-t/install/lib/vapi_runtime-2.19.0-py2.py3-none-any.whl

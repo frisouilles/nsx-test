@@ -1,6 +1,0 @@
-setup.py
-NSX_SDK.egg-info/PKG-INFO
-NSX_SDK.egg-info/SOURCES.txt
-NSX_SDK.egg-info/dependency_links.txt
-NSX_SDK.egg-info/requires.txt
-NSX_SDK.egg-info/top_level.txt
